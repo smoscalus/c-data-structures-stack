@@ -1,24 +1,23 @@
 #include "stdio.h"
 #include "string.h"
-
-#define MaxSizeStack 120
-#define MaxLen 100
-
+#include "stdlib.h"
 
 typedef struct
 {
-    char buf[MaxSizeStack];
+    char* buf;
+    int* beginningElem;
 
-    int startElem[MaxLen];
-
+    int maxlen;
     int len;
     int CallList;
 }MyStack;
 
-MyStack CreateStack()
+MyStack CreateStack(int lenghbuf)
 {
     MyStack base;
-    for(int i = 0; i < MaxSizeStack;i++){base.buf[i] = '\0';}
+    base.maxlen = lenghbuf;
+    base.buf = malloc(lenghbuf * sizeof(char));
+    base.beginningElem = malloc(lenghbuf * sizeof(int));
     base.len = 0;
     base.CallList = 0;
     return base;
@@ -26,34 +25,34 @@ MyStack CreateStack()
 
 int push(MyStack* stack, char value[])
 {
-    if (stack->len >= MaxSizeStack)
+    if (stack->len >= stack->maxlen)
     {
         printf("stack overflow");
-        return 0;
+        stack->buf = realloc(stack->buf, stack->maxlen * sizeof(char) * 2);
+        stack->beginningElem = realloc(stack->beginningElem, stack->maxlen * sizeof(int) * 2);
+        stack->maxlen *= 2;
     }
-    else
-    {
-        strcat(stack->buf + stack->len, value);
+        stack->beginningElem[stack->CallList] = stack->len;
+        strcpy(stack->buf + stack->len, value);
 
-        size_t lenVal = strlen(value) + 1;
-        stack->startElem[stack->CallList] = stack->len;
-
-        stack->len +=  lenVal;
+        stack->len += strlen(value) + 1;
         stack->CallList++;
-    }
+
     return 1;
 }
+
+
 void pop(MyStack* stack,char* res)
 {
 
-    for (int i = stack->startElem[stack->CallList - 1], j = 0;  i < stack->len; i++,j++)
+    for (int i = stack->beginningElem[stack->CallList - 1], j = 0;  i < stack->len; i++,j++)
     {
         res[j] = stack->buf[i];
         stack->buf[i] = '\0';
     }
 
-    stack->len -= stack->len - stack->startElem[stack->CallList - 1];
-    stack->startElem[stack->CallList - 1] = 0;
+    stack->len -= stack->len - stack->beginningElem[stack->CallList - 1];
+    stack->beginningElem[stack->CallList - 1] = 0;
     stack->CallList -= 1;
 }  
 
@@ -65,13 +64,20 @@ int isEmpty(MyStack* stack)
 
 void peek(MyStack* stack,char* res)
 {
-    for (int i = stack->startElem[stack->CallList - 1], j = 0; i < stack->len; i++,j++)
+   
+    for (int i = stack->beginningElem[stack->CallList - 1], j = 0; i < stack->len; i++,j++)
         res[j] = stack->buf[i];
+}
+
+void freestack(MyStack* stack)
+{
+    free(stack->buf);
+    free(stack->beginningElem);
 }
 
 int main ()
 {
-    MyStack stack = CreateStack();
+    MyStack stack = CreateStack(60);
     push(&stack,"hello");
     push(&stack,"pidr");
     push(&stack,"bye");
@@ -81,5 +87,6 @@ int main ()
     char res[60];
     peek(&stack, res);
     printf("%s",res);
+    freestack(&stack);
     return 0;
 }
