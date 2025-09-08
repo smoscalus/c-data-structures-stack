@@ -44,6 +44,10 @@ int push(MyStack* stack, char value[])
 
 void pop(MyStack* stack,char* res)
 {
+    if (stack->CallList == 0){
+        res[0] = '\0';
+        return;
+    }
 
     for (int i = stack->beginningElem[stack->CallList - 1], j = 0;  i < stack->len; i++,j++)
     {
@@ -51,22 +55,28 @@ void pop(MyStack* stack,char* res)
         stack->buf[i] = '\0';
     }
 
-    stack->len -= stack->len - stack->beginningElem[stack->CallList - 1];
+    stack->len = stack->beginningElem[stack->CallList - 1];
     stack->beginningElem[stack->CallList - 1] = 0;
-    stack->CallList -= 1;
+    stack->CallList--;
 }  
+
+void peek(MyStack* stack,char* res)
+{
+    if (stack->CallList == 0) {
+        res[0] = '\0';
+        return;
+    }
+
+    int j = 0;
+    for (int i = stack->beginningElem[stack->CallList - 1]; i < stack->len; i++,j++)
+        res[j] = stack->buf[i];
+
+    res[j++] = '\0';
+}
 
 int isEmpty(MyStack* stack)
 {
     return stack->CallList == 0;
-}
-
-
-void peek(MyStack* stack,char* res)
-{
-   
-    for (int i = stack->beginningElem[stack->CallList - 1], j = 0; i < stack->len; i++,j++)
-        res[j] = stack->buf[i];
 }
 
 void freestack(MyStack* stack)
