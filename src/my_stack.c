@@ -2,11 +2,9 @@
 #include "string.h"
 #include "stdlib.h"
 
-typedef struct
-{
+typedef struct{
     char* buf;
     int* beginningElem;
-
     int maxlen;
     int len;
     int CallList;
@@ -83,20 +81,4 @@ void freestack(MyStack* stack)
 {
     free(stack->buf);
     free(stack->beginningElem);
-}
-
-int main ()
-{
-    MyStack stack = CreateStack(60);
-    push(&stack,"hello");
-    push(&stack,"pidr");
-    push(&stack,"bye");
-
-
-    printf("%c",isEmpty(&stack));
-    char res[60];
-    peek(&stack, res);
-    printf("%s",res);
-    freestack(&stack);
-    return 0;
 }
