@@ -59,27 +59,27 @@ void pop(MyStack* stack,char* res)
 
 int isEmpty(MyStack* stack)
 {
-    if (stack->CallList)
-        return 0;
-    else
-        return 1;
-
+    return stack->CallList == 0;
 }
 
 
-int peek(MyStack* stack,char* res)
+void peek(MyStack* stack,char* res)
 {
     for (int i = stack->startElem[stack->CallList - 1], j = 0; i < stack->len; i++,j++)
         res[j] = stack->buf[i];
 }
+
 int main ()
 {
     MyStack stack = CreateStack();
     push(&stack,"hello");
     push(&stack,"pidr");
     push(&stack,"bye");
-    
-    printf("%d",isEmpty(&stack));
-    
+
+
+    printf("%c",isEmpty(&stack));
+    char res[60];
+    peek(&stack, res);
+    printf("%s",res);
     return 0;
 }
