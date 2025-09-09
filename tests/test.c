@@ -12,6 +12,7 @@
             printf("[PASS] %s:%d\n", __FILE__, __LINE__); \
         } \
     }
+
 #define TEST_EQ_int(expected,actual){\
         if (expected != actual){ \
             printf ("[FAIL] %s:%d: expected %d, got %d\n",  __FILE__, __LINE__, (expected), (actual));\
@@ -21,6 +22,17 @@
             printf("[PASS] %s:%d\n", __FILE__, __LINE__); \
         } \
     }
+
+#define TEST_EQ_PTR(expected,actual){\
+        if (expected != actual){ \
+            printf ("[FAIL] %s:%d: expected %p, got %p\n",  __FILE__, __LINE__, (expected), (actual));\
+            return 1;\
+        }\
+        else { \
+            printf("[PASS] %s:%d\n", __FILE__, __LINE__); \
+        } \
+    }
+
 
 int test_push_pop(){
     MyStack s = CreateStack(10);
@@ -68,12 +80,9 @@ int test_freestack()
 
     freestack(&s);
 
-
-    if(s.beginningElem != NULL || s.buf != NULL){
-        printf("[WARN] pointers not null after free\n");
-    }    
-
-    printf("[PASS] freestack test ran \n");
+    TEST_EQ_PTR(NULL,s.beginningElem);
+    TEST_EQ_PTR(NULL,s.buf);
+    
     return 0;
 }
 
