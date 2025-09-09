@@ -19,7 +19,7 @@ int push(MyStack* stack, char value[]);
 // give elem
 void pop(MyStack* stack,char* res);
 
-// see on elem
+// check last elem
 void peek(MyStack* stack,char* res);
 
 // check if the stack is empty
