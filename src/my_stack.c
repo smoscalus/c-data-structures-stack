@@ -79,6 +79,12 @@ int isEmpty(MyStack* stack)
 
 void freestack(MyStack* stack)
 {
-    free(stack->buf);
-    free(stack->beginningElem);
+    if (stack->buf){
+        free(stack->buf);
+        stack->buf = NULL;
+    }
+    if (stack->beginningElem){
+        free(stack->beginningElem);
+        stack->beginningElem = NULL;
+    }
 }
