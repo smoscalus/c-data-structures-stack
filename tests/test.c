@@ -82,7 +82,7 @@ int test_freestack()
 
     TEST_EQ_PTR(NULL,s.beginningElem);
     TEST_EQ_PTR(NULL,s.buf);
-    
+
     return 0;
 }
 
