@@ -36,8 +36,8 @@ Clone the repository and build the project. The tests will be run automatically:
 Клонируйте репозиторий и соберите проект. Тесты будут запущены автоматически:
 
 ```bash
-git clone https://github.com/smoscalus/c-data-structures.git
-cd c-data-structures
+git clone https://github.com/smoscalus/c-data-structures-stack.git
+cd c-data-structures-stack
 make
 ```
 
