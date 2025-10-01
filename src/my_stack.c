@@ -26,9 +26,9 @@ int push(MyStack* stack, char value[])
     if (stack->len >= stack->maxlen)
     {
         printf("stack overflow");
-        stack->buf = realloc(stack->buf, stack->maxlen * sizeof(char) * 2);
-        stack->beginningElem = realloc(stack->beginningElem, stack->maxlen * sizeof(int) * 2);
         stack->maxlen *= 2;
+        stack->buf = realloc(stack->buf, stack->maxlen * sizeof(char));
+        stack->beginningElem = realloc(stack->beginningElem, stack->maxlen * sizeof(int));
     }
         stack->beginningElem[stack->CallList] = stack->len;
         strcpy(stack->buf + stack->len, value);
