@@ -15,4 +15,4 @@ test: libmystack.o tests/test.c
 
 #clean up build artifacts
 clean:
-	rm -f *.o test_stack
+	del Q/ -f *.o test.exe
