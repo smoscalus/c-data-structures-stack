@@ -36,9 +36,9 @@
 
 int test_push_pop(){
     MyStack s = CreateStack(10);
-    push(&s, "hello");
+    push(&s, "hello", sizeof(char));
     char res[10];
-    pop(&s, res);
+    pop(&s, res,10);
     TEST_EQ_STR("hello", res);
     return 0;
 }
@@ -46,25 +46,25 @@ int test_push_pop(){
 int test_peek(){
     MyStack s = CreateStack(10);
 
-    push(&s, "hello");
+    push(&s, "hello", 10);
 
     char res[10];
-    peek(&s,res);
+    peek(&s,res, 10);
     TEST_EQ_STR("hello", res);
-    pop(&s, res);
+    pop(&s, res, 10);
 
-    peek(&s,res);
+    peek(&s,res, 10);
     TEST_EQ_STR("", res);
     return 0;
 }
 
 int test_isEmpty(){
     MyStack s = CreateStack(10);
-    push(&s, "hello");
+    push(&s, "hello", 10);
     TEST_EQ_int(0,isEmpty(&s));
 
     char res[10];
-    pop(&s,res);
+    pop(&s,res, 10);
 
     TEST_EQ_int(1,isEmpty(&s));
     return 0;
@@ -76,7 +76,7 @@ int test_freestack()
     MyStack s;
 
     s.beginningElem = malloc(sizeof(int) * 10);
-    s.buf = malloc(sizeof(char) * 10);
+    s.buf = malloc(10);
 
     freestack(&s);
 
@@ -88,6 +88,7 @@ int test_freestack()
 
 
 int main() {
+    printf("ss");
     test_peek();
     test_isEmpty();
     test_push_pop();

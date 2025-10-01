@@ -2,25 +2,25 @@
 #define MYSTACK_H
 
 
-typedef struct {
+typedef struct{
     char* buf;
-    int* beginningElem;
-    int maxlen;
-    int len;
-    int CallList;
+    size_t* beginningElem;
+    size_t maxlen;
+    size_t len;
+    size_t CallList;
 }MyStack;
 
 // create stack
-MyStack CreateStack(int lenghbuf);
+MyStack CreateStack(size_t size);
 
 // add elem
-int push(MyStack* stack, char value[]);
+int push(MyStack* stack, void* data, size_t size);
 
 // give elem
-void pop(MyStack* stack,char* res);
+void pop(MyStack* stack, void* data, size_t size);
 
 // check last elem
-void peek(MyStack* stack,char* res);
+void peek(MyStack* stack,void* data,size_t size);
 
 // check if the stack is empty
 int isEmpty(MyStack* stack);
