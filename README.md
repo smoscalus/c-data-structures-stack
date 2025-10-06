@@ -24,8 +24,9 @@ Progress in implementing data structures:
 Прогресс в реализации структур данных:
 
 - [x] Стек (`stack`)
-- [ ] Очередь (`queue`)
-- [ ] Список (`list`)
+- [x] Очередь (`queue`)
+- [x] Список (`list`)
+- [ ] Двохсвязный Список (`DList`)
 - [ ] Дерево (`tree`)
 - [ ] Хеш-таблица (`hash table`)
 
